@@ -20,4 +20,15 @@ public interface ExperimentDetailRespostory extends JpaRepository<ExperimentDeta
             "LEFT JOIN ExperimentDetail ed on cd.student.id=ed.student.id " +
             "WHERE ed.experiment.id != :expid or ed.experiment.id is null and cd.course.id=:cid GROUP BY cd.id")
     List<Student> listStudents(@Param("cid") long cid, @Param("expid") long expId);
+
+    /**
+     * 查询指定学生的指定实验的具体信息
+     * @param userId
+     * @param expId
+     * @return
+     */
+    @Query("FROM ExperimentDetail e WHERE e.student.id=:userId AND e.experiment.id=:expId")
+    ExperimentDetail find(@Param("userId") long userId, @Param("expId") long expId);
+
+
 }
