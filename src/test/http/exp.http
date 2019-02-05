@@ -1,0 +1,13 @@
+# For a quick start check out our HTTP Requests collection (Tools|HTTP Client|Open HTTP Requests Collection).
+#
+# Following HTTP Request Live Templates are available:
+# * 'gtrp' and 'gtr' create a GET request with or without query parameters;
+# * 'ptr' and 'ptrp' create a POST request with a simple or parameter-like body;
+# * 'mptr' and 'fptr' create a POST request to submit a form with a text or file field (multipart/form-data);
+GET http://localhost:8080/admin/courses/1/experiments?name=ww&course
+authorization:bc9b8b30515c3e3e34e376bf5487a33c165003b9701030d420ee41f14e4858b2959c3be446d36a3726af32cfe8f33426
+
+###
+GET http://localhost:8080/test/sss
+
+###

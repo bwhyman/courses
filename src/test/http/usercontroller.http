@@ -1,0 +1,48 @@
+# For a quick start check out our HTTP Requests collection (Tools|HTTP Client|Open HTTP Requests Collection).
+#
+# Following HTTP Request Live Templates are available:
+# * 'gtrp' and 'gtr' create a GET request with or without query parameters;
+# * 'ptr' and 'ptrp' create a POST request with a simple or parameter-like body;
+# * 'mptr' and 'fptr' create a POST request to submit a form with a text or file field (multipart/form-data);
+
+###
+GET http://localhost:8080/updateusersetting
+Authorization:bc9b8b30515c3e3e34e376bf5487a33c165003b9701030d420ee41f14e4858b2959c3be446d36a3726af32cfe8f33426
+
+###
+###
+GET http://localhost:8080/main
+#student:b13f9e3dacc27ad1f8a51768bf4e334b96eb33b7660b7ae76036a045c9210292b66f6458c8bb9e408b93fd04071003ce
+Authorization:92e7543381299be18c3dab3d7d8ad2a590270ddf11757a6c29d39404e0ef03ce6b8e5d9fefabc323c1f8075392b5dc57
+
+###
+GET http://localhost:8080/exp?id=1
+Accept: application/json
+Authorization:bc9b8b30515c3e3e34e376bf5487a33c165003b9701030d420ee41f14e4858b2959c3be446d36a3726af32cfe8f33426
+
+###
+###
+GET http://localhost:8080/homework/1/HTML
+authorization:bc9b8b30515c3e3e34e376bf5487a33c165003b9701030d420ee41f14e4858b2959c3be446d36a3726af32cfe8f33426
+
+###
+POST http://localhost:8080//homework/addhomework
+Content-Type: application/json
+Authorization:a267f8f506a6ab8f4e60b61a8e4ff541e5058c52ed28f7ca6524997de3000f2d318dcb5fd55ae06120d2958c0aac1224
+
+{
+  "homework": {"id": 1},
+  "solution": "01"
+}
+###
+GET http://localhost:8080/a?id=1
+Accept: application/json
+Authorization:7f66dd8be82c14c94ff9a38546bc43f0177ac69ac59c04ad7d92826da25efc41b3208d57447d7574da11d5129e81c863
+
+###
+GET http://localhost:8080/downloadexpfile?expId=1
+Accept: application/json
+Authorization:7f66dd8be82c14c94ff9a38546bc43f0177ac69ac59c04ad7d92826da25efc41b3208d57447d7574da11d5129e81c863
+
+
+###

@@ -1,23 +1,24 @@
 package com.se.courses.entity;
 
-import lombok.Data;
-
-import java.util.Set;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
-import javax.persistence.OrderBy;
-@Entity
-@Data
-public class Teacher extends User{
-	@OneToMany(mappedBy = "teacher")
-	@OrderBy(value ="id ASC")
-	private Set<Course> courses;
+import java.util.List;
 
-	public Teacher(long id) {
-		super(id);
-	}
-	public Teacher() {
-		// TODO Auto-generated constructor stub
-	}
+@Entity
+@Getter
+@Setter
+public class Teacher extends User {
+    @OneToMany(mappedBy = "teacher")
+    private List<Course> courses;
+
+    public Teacher(long id) {
+        super(id);
+    }
+
+    public Teacher() {
+        // TODO Auto-generated constructor stub
+    }
 }

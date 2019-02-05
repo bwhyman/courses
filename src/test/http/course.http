@@ -1,0 +1,28 @@
+# For a quick start check out our HTTP Requests collection (Tools|HTTP Client|Open HTTP Requests Collection).
+#
+# Following HTTP Request Live Templates are available:
+# * 'gtrp' and 'gtr' create a GET request with or without query parameters;
+# * 'ptr' and 'ptrp' create a POST request with a simple or parameter-like body;
+# * 'mptr' and 'fptr' create a POST request to submit a form with a text or file field (multipart/form-data);
+###
+###student
+###3789937447e461969a91f747b989d4b9f01cd7eae7fff874c3b64f32741cb1dfbd293543a519324dc1d3c682c1a7e291
+##1bae0755736b04caa81de81dba1dd6479064fc9cfcfa5420c1c327fad1ab53852a48c5668ad7fc28ddf03919fe8533cf
+GET http://localhost:8080/courses/1/expdetails
+authorization:3789937447e461969a91f747b989d4b9f01cd7eae7fff874c3b64f32741cb1dfbd293543a519324dc1d3c682c1a7e291
+
+###
+GET http://localhost:8080/main
+authorization:3789937447e461969a91f747b989d4b9f01cd7eae7fff874c3b64f32741cb1dfbd293543a519324dc1d3c682c1a7e291
+
+###
+###
+PATCH http://localhost:8080//test/courses/1
+authorization:1bae0755736b04caa81de81dba1dd6479064fc9cfcfa5420c1c327fad1ab53852a48c5668ad7fc28ddf03919fe8533cf
+Content-Type: application/json
+
+{
+"id":"1","name": "BO", "students": null
+}
+
+###

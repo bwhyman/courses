@@ -1,31 +1,34 @@
 package com.se.courses.entity;
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Set;
+import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Teacher teacher;
     @OneToMany(mappedBy = "course")
-    @OrderBy(value = "id ASC")
-    private Set<CourseDetail> courseDetails;
-    @OrderBy(value = "id ASC")
+    @JsonIgnore
+    private List<CourseDetail> courseDetails;
     @OneToMany(mappedBy = "course")
-    private Set<Experiment> experiments;
-    @OrderBy(value = "id ASC")
+    private List<Experiment> experiments;
     @OneToMany(mappedBy = "course")
-    private Set<Homework> homeworks;
-
-    @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private List<Homework> homeworks;
+    @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", updatable = false,
+            insertable = false)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime insertTime;
 
     public Course(long id) {

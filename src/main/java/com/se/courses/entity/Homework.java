@@ -1,28 +1,40 @@
 package com.se.courses.entity;
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
+
 @Entity
-@Data
+@Getter
+@Setter
 public class Homework {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
-	private String title;
-	private String content;
-	@ManyToOne
-	private Course course;
-	@Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-	private LocalDateTime insertTime;
-	public Homework(long id) {
-		super();
-		this.id = id;
-	}
-	public Homework() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    private String title;
+    @Column(columnDefinition = "TEXT")
+    private String content;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Course course;
+    @OneToMany(mappedBy = "homework", cascade = CascadeType.REMOVE)
+    private List<HomeworkDetail> homeworkDetails;
+    @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", updatable = false,
+            insertable = false)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime insertTime;
+
+    public Homework(long id) {
+        super();
+        this.id = id;
+    }
+
+    public Homework() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
 }

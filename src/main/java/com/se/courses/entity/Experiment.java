@@ -1,24 +1,30 @@
 package com.se.courses.entity;
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Set;
+import java.util.List;
+
 @Entity
-@Data
+@Getter
+@Setter
 public class Experiment {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
-	private String name;
-	// 实验文件扩展名
-	private String fileExtension;
-	@ManyToOne
-	private Course course;
-	@OneToMany(mappedBy = "experiment")
-	private Set<ExperimentDetail> detail;
-	@Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-	private LocalDateTime insertTime;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    private String name;
+    // 实验文件扩展名
+    private String fileExtension;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Course course;
+    @OneToMany(mappedBy = "experiment", cascade = CascadeType.REMOVE)
+    private List<ExperimentDetail> detail;
+    @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", updatable = false,
+            insertable = false)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime insertTime;
 
 }

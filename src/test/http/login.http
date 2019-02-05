@@ -1,0 +1,43 @@
+# For a quick start check out our HTTP Requests collection (Tools|HTTP Client|Open HTTP Requests Collection).
+#
+# Following HTTP Request Live Templates are available:
+# * 'gtrp' and 'gtr' create a GET request with or without query parameters;
+# * 'ptr' and 'ptrp' create a POST request with a simple or parameter-like body;
+# * 'mptr' and 'fptr' create a POST request to submit a form with a text or file field (multipart/form-data);
+
+###
+POST http://localhost:8080/login
+Content-Type: application/json
+
+{
+  "number": "1",
+  "password": "1007",
+  "checked": false
+}
+###
+
+###
+POST http://localhost:8080/login
+Content-Type: application/x-www-form-urlencoded
+
+number=1007&password=1007
+###
+GET http://localhost:8080/login
+Cookie:courses=2a3db793e19c332a871a47dfb83b5e9ad486c86403e1c87337e4f2459e54002b59a69da295459fbe609cb9554a5605e872bcc4ee808d68519bbcce2de6dd7e7a
+
+###
+POST http://localhost:8080/cookielogin
+Cookie:courses=2a3db793e19c332a871a47dfb83b5e9ad486c86403e1c87337e4f2459e54002b59a69da295459fbe609cb9554a5605e872bcc4ee808d68519bbcce2de6dd7e7a
+
+###
+GET http://localhost:8080/pp
+Authorization:bc9b8b30515c3e3e34e376bf5487a33c165003b9701030d420ee41f14e4858b2959c3be446d36a3726af32cfe8f33426
+
+###
+POST http://localhost:8080/login
+Content-Type: application/x-www-form-urlencoded
+
+{
+  "number": "1","password": "aa"
+}
+###
