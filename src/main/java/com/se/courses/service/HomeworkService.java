@@ -7,6 +7,7 @@ import com.se.courses.repository.HomeworkDetailRepository;
 import com.se.courses.repository.HomeworkReposityory;
 import com.se.courses.repository.StudentRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,8 +25,6 @@ public class HomeworkService {
     private HomeworkDetailRepository hdRep;
     @Autowired
     private HomeworkReposityory homeRep;
-    @Autowired
-    private CourseRepository courseRepository;
 
     public int getHomeworkNumber(long cid, long sid) {
         return homeRep.count(cid, sid);
@@ -41,16 +40,16 @@ public class HomeworkService {
         homeRep.save(homework);
         homeRep.refresh(homework);
     }
+    public Homework getHomework(long hid) {
+        return homeRep.findById(hid).orElse(null);
+    }
 
     public List<Homework> listHomeworks(long cid, long sid) {
         return homeRep.list(cid, sid);
     }
 
     public void updateHomework(Homework homework) {
-        Homework h = homeRep.findById(homework.getId())
-                .orElseThrow(() -> new CourseException("作业不存在"));
-        h.setTitle(homework.getTitle());
-        h.setContent(homework.getContent());
+        homeRep.refresh(homeRep.saveAndFlush(homework));
     }
     public void deleteHomework(long hid) {
         homeRep.deleteById(hid);
@@ -79,6 +78,10 @@ public class HomeworkService {
         return homeRep.findById(hid)
                 .map(h -> hdRep.listStudents(h.getCourse().getId(), hid))
                 .orElse(List.of());
+    }
+
+    public HomeworkDetail getHomeworkDetail(long hid, long sid) {
+        return hdRep.find(hid, sid);
     }
 
 }

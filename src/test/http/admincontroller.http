@@ -18,3 +18,18 @@ Accept: application/json
 authorization:b2a612d3a74033e1b7832a149ca8799e26395b6876bea69520b74f6afbffcd6346bd7f3dd57570b5e9ef9d8d5948dbb9
 
 ###
+POST http://localhost:8080/api/admin/courses/1/homeworks
+authorization:b2a612d3a74033e1b7832a149ca8799e26395b6876bea69520b74f6afbffcd6346bd7f3dd57570b5e9ef9d8d5948dbb9
+Content-Type: application/json
+
+{
+  "title": "df",
+  "content": "content",
+  "deadLineTime": "2019-06-06 08:00"
+}
+
+###
+GET http://localhost:8080/api/admin/courses/1/homeworks/1/students/1
+authorization:b2a612d3a74033e1b7832a149ca8799e26395b6876bea69520b74f6afbffcd6346bd7f3dd57570b5e9ef9d8d5948dbb9
+
+###

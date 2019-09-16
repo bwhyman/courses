@@ -2,14 +2,12 @@ package com.se.courses.controller;
 
 import com.se.courses.component.CommonComponent;
 import com.se.courses.component.FileComponent;
-import com.se.courses.entity.Course;
-import com.se.courses.entity.Experiment;
-import com.se.courses.entity.Homework;
-import com.se.courses.entity.Student;
+import com.se.courses.entity.*;
 import com.se.courses.service.CourseService;
 import com.se.courses.service.ExperimentService;
 import com.se.courses.service.HomeworkService;
 import com.se.courses.service.UserService;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -20,6 +18,7 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/admin")
@@ -69,6 +68,7 @@ public class AdminController {
 
     @PatchMapping("/courses/{cid}/experiments/{expid}")
     public Map updateExp(@PathVariable long cid, @RequestBody Experiment experiment) {
+        log.debug("{}", experiment.getDeadLineTime());
         expService.updateExperiment(experiment);
         return Map.of("exps", eService.listTeacherExperiments(cid, cComponent.getUserId()));
     }
@@ -101,13 +101,16 @@ public class AdminController {
      */
     @PostMapping("/courses/{cid}/homeworks")
     public Map postHomework(@PathVariable long cid, @RequestBody Homework homework) {
+
         homework.setCourse(new Course(cid));
         hService.addHomework(homework);
         return Map.of("homeworks", hService.listTeaherHomeworks(cid, cComponent.getUserId()));
+
     }
 
     @PatchMapping("/courses/{cid}/homeworks/{hid}")
-    public Map updateHomework(@PathVariable long cid, @RequestBody Homework homework) {
+    public Map updateHomework(@PathVariable long cid,
+                              @RequestBody Homework homework) {
         hService.updateHomework(homework);
         return Map.of("homeworks", hService.listTeaherHomeworks(cid, cComponent.getUserId()));
     }
@@ -121,6 +124,11 @@ public class AdminController {
     @GetMapping("/courses/{cid}/homeworks/{hid}/unsubmited")
     public Map listHomeworkUnsubmited(@PathVariable long hid) {
         return Map.of("students", hService.listUnsubmitedStudents(hid));
+    }
+    @GetMapping("/courses/{cid}/homeworks/{hid}/students/{sid}")
+    public Map getHomeworkDetail(@PathVariable long hid, @PathVariable long sid) {
+        return Map.of("homeworkDetail",
+                Optional.ofNullable(hService.getHomeworkDetail(hid, sid)).orElseGet(HomeworkDetail::new));
     }
 
     /*
@@ -147,6 +155,4 @@ public class AdminController {
         userService.updatePassword(number);
         return null;
     }
-
-
 }

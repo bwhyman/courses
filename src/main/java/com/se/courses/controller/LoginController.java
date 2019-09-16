@@ -85,6 +85,7 @@ public class LoginController {
         var cookie = new Cookie(Constant.COOKIS_NUMBER, encryptorComponent.encrypt(cookieMap));
         int expiry = 60 * 60 * 24 * 365;
         cookie.setMaxAge(expiry);
+        cookie.setPath("/");
         return cookie;
     }
     private Cookie createCookieUser(User user) {
@@ -95,6 +96,7 @@ public class LoginController {
             cookie = new Cookie(Constant.COOKIS_USER, URLEncoder.encode(json, "UTF-8"));
             int expiry = 60 * 60 * 24 * 365;
             cookie.setMaxAge(expiry);
+            cookie.setPath("/");
         } catch (UnsupportedEncodingException e) {
             throw new CourseException("创建cookie错误！");
         }

@@ -36,7 +36,4 @@ public class CommonComponent {
         return (long) getCurrentRequest().getAttribute("aId");
     }
 
-    public Map getMap() {
-        return new HashMap<String , Objects>();
-    }
 }

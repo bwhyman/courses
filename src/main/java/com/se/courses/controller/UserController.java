@@ -18,6 +18,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.Temporal;
+import java.time.temporal.TemporalUnit;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -84,6 +88,14 @@ public class UserController {
 
     @PostMapping("courses/{cid}/experiments/{expid}/file")
     public Map addExps(@PathVariable long cid, @PathVariable long expid, MultipartFile file) throws IOException {
+        Experiment experiment = expService.getExperiment(expid);
+        Optional.ofNullable(expService.getExperiment(expid))
+                .ifPresent(e -> {
+                    if (LocalDateTime.now().isAfter(e.getDeadLineTime())) {
+                        throw new CourseException("超过截止时间，提交无效");
+                    }
+                });
+
         expService.addExperimentDetail(cid, expid, cComponent.getUserId(), file.getOriginalFilename(),
                 file.getBytes());
         return Map.of("expDetails", expService.listExperimentDetails(cid, cComponent.getUserId()));
@@ -121,6 +133,12 @@ public class UserController {
     @PatchMapping("/courses/{cid}/homeworks/{hid}/homeworkdetail")
     public Map patchHomeworkDetail(@PathVariable long cid,@PathVariable long hid,
                                     @RequestBody HomeworkDetail detail) {
+        Optional.ofNullable(hService.getHomework(hid))
+                .ifPresent(h -> {
+                    if (LocalDateTime.now().isAfter(h.getDeadLineTime())) {
+                        throw new CourseException("超过截止时间，提交无效");
+                    }
+                });
 
             hService.addHomeworkDetail(hid, cComponent.getUserId(), detail);
         return Map.of("homeworkDetails", hService.listStudentHomeworkDetails(cid,
@@ -141,7 +159,6 @@ public class UserController {
     @PatchMapping("/updatepassword")
     public void updatePassword(@RequestBody Map<String, String> map) {
         String pwd = map.get("password");
-        log.debug(pwd);
         userService.updatePassword(cComponent.getUserId(), pwd);
     }
 }

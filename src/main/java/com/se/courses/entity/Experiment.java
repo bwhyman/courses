@@ -18,13 +18,15 @@ public class Experiment {
     private String name;
     // 实验文件扩展名
     private String fileExtension;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+    private LocalDateTime deadLineTime;
     @ManyToOne(fetch = FetchType.LAZY)
     private Course course;
     @OneToMany(mappedBy = "experiment", cascade = CascadeType.REMOVE)
     private List<ExperimentDetail> detail;
     @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", updatable = false,
             insertable = false)
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime insertTime;
 
 }

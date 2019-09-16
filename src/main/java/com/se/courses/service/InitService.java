@@ -31,6 +31,13 @@ public class InitService {
             teacher.setAuthority(new Authority(Authority.TEACHER_ID));
             teacher.setPassword(passwordEncoder.encode(number));
             teacherRep.save(teacher);
+
+            var jimingyu = new Teacher();
+            jimingyu.setName("纪明宇");
+            String jnum = "1008";
+            jimingyu.setAuthority(new Authority(Authority.TEACHER_ID));
+            jimingyu.setPassword(passwordEncoder.encode(jnum));
+            teacherRep.save(jimingyu);
         }
     }
 

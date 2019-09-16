@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Getter
@@ -17,7 +16,7 @@ public class Student extends User {
     private String clazz;
     @OneToMany(mappedBy = "student")
     @OrderBy(value = "id ASC")
-    private Set<CourseDetail> courseDetails;
+    private List<CourseDetail> courseDetails;
     @OneToMany(mappedBy = "student")
     private List<ExperimentDetail> experimentDetails;
 

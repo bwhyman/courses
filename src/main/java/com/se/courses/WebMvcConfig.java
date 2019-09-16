@@ -24,13 +24,9 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(userInterceptor)
-                .addPathPatterns("/**")
+                .addPathPatterns("/api/**")
                 .excludePathPatterns("/api/login")
-                .excludePathPatterns("/cookielogin")
-                // 排除默认错误处理请求，单独的
-                // 会根据发起的请求类型(json，浏览器)，自动返回错误页面/json
-                .excludePathPatterns("/error");
-        //
+                .excludePathPatterns("/api/cookielogin");
         registry.addInterceptor(adminInterceptor)
                 .addPathPatterns("/api/admin/**");
     }

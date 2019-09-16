@@ -6,28 +6,17 @@
 # * 'mptr' and 'fptr' create a POST request to submit a form with a text or file field (multipart/form-data);
 
 ###
-POST http://localhost:8080/login
+POST http://localhost:8080/api/login
 Content-Type: application/json
 
 {
-  "number": "1",
+  "number": "1007",
   "password": "1007",
-  "checked": false
+  "checked": true
 }
 ###
-
-###
-POST http://localhost:8080/login
-Content-Type: application/x-www-form-urlencoded
-
-number=1007&password=1007
-###
-GET http://localhost:8080/login
-Cookie:courses=2a3db793e19c332a871a47dfb83b5e9ad486c86403e1c87337e4f2459e54002b59a69da295459fbe609cb9554a5605e872bcc4ee808d68519bbcce2de6dd7e7a
-
-###
-POST http://localhost:8080/cookielogin
-Cookie:courses=2a3db793e19c332a871a47dfb83b5e9ad486c86403e1c87337e4f2459e54002b59a69da295459fbe609cb9554a5605e872bcc4ee808d68519bbcce2de6dd7e7a
+POST http://localhost:8080/api/cookielogin
+Cookie:number=a0246a6d164540eeb6d99354538b7297d185b421521073284c3fdd1714f4d4858155f5452a8d040a905d6058f0ee7cf2
 
 ###
 GET http://localhost:8080/pp

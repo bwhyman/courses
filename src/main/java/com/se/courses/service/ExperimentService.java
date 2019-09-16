@@ -52,10 +52,7 @@ public class ExperimentService {
     }
 
     public void updateExperiment(Experiment experiment) {
-        experimentRep
-                .findById(experiment.getId())
-                .orElseThrow(() -> new CourseException("实验不存在"))
-                .setName(experiment.getName());
+        experimentRep.refresh(experimentRep.saveAndFlush(experiment));
     }
 
     public void deleteExperiment(long cid, long expid) {

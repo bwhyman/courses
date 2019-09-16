@@ -13,11 +13,10 @@ import java.util.List;
 @Repository
 public interface HomeworkDetailRepository extends CustomizedRepoistory<HomeworkDetail, Long> {
     /**
-     * 指定学的指定作业的详细信息
-     *
-     * @param hId
-     * @param uId
-     * @return
+     * 指定学生的指定作业的详细信息
+     * @param hId 作业ID
+     * @param uId 学生ID
+     * @return 返回作业详细信息
      */
     @Query("FROM HomeworkDetail h WHERE h.student.id=:uId AND h.homework.id=:hId")
     HomeworkDetail find(@Param("hId") long hId, @Param("uId") long uId);
