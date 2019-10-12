@@ -1,0 +1,16 @@
+POST http://localhost:8080/api/admin/courses/1/homeworks
+Authorization: abf9479322fcb55e20a30c23df2978a54d9382a4d5057e0f382ca9fdf565bf8c52269f53278a39bca19ba87a58648ab9
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="content"
+Content-Type: text/plain
+
+BO
+--WebAppBoundary
+Content-Disposition: form-data; name="files"; filename="data2.json"
+
+--WebAppBoundary
+Content-Disposition: form-data; name="files"; filename="data.json"
+
+###

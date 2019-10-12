@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.net.URLEncoder;
@@ -100,13 +101,24 @@ public class AdminController {
      * ===================HOMEWOEK============================
      */
     @PostMapping("/courses/{cid}/homeworks")
-    public Map postHomework(@PathVariable long cid, @RequestBody Homework homework) {
+    public Map postHomework(@PathVariable long cid, Homework homework, MultipartFile[] files) {
+        if (files.length > 0) {
 
+        }
+        return null;
+
+        /*homework.setCourse(new Course(cid));
+        hService.addHomework(homework);
+        return Map.of("homeworks", hService.listTeaherHomeworks(cid, cComponent.getUserId()));*/
+
+    }
+    /*@PostMapping("/courses/{cid}/homeworks")
+    public Map postHomework(@PathVariable long cid, @RequestBody Homework homework) {
         homework.setCourse(new Course(cid));
         hService.addHomework(homework);
         return Map.of("homeworks", hService.listTeaherHomeworks(cid, cComponent.getUserId()));
 
-    }
+    }*/
 
     @PatchMapping("/courses/{cid}/homeworks/{hid}")
     public Map updateHomework(@PathVariable long cid,
