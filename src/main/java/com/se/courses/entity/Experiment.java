@@ -18,6 +18,7 @@ public class Experiment {
     private String name;
     // 实验文件扩展名
     private String fileExtension;
+    private float size = 10;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime deadLineTime;
     @ManyToOne(fetch = FetchType.LAZY)
