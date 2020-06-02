@@ -41,4 +41,4 @@ jobs:
           docker-compose -f base.yaml up -d
           cd openjdk
           docker-compose -f openjdk.yaml pull && docker-compose -f openjdk.yaml up -d
-          [ -z $(docker images -q  ${{ secrets.dockerrepository }}) ] || docker rmi $(docker images -f dangling=true ${{ secrets.dockerrepository }} -q
+          [ -z $(docker images -q  ${{ secrets.dockerrepository }}) ] || docker rmi $(docker images -f dangling=true ${{ secrets.dockerrepository }} -q)
